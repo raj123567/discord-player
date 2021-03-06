@@ -230,6 +230,7 @@ class Player extends EventEmitter {
                     const track = new Track({
                         title: data.title,
                         url: data.url,
+                        length: data.duration,
                         lengthSeconds: data.duration / 1000,
                         description: data.description,
                         thumbnail: data.thumbnail,
@@ -1051,12 +1052,12 @@ class Player extends EventEmitter {
         const index = Math.round((currentStreamTime / totalTime) * 15)
         // conditions
         if ((index >= 1) && (index <= 15)) {
-            const bar = '▬▬▬▬▬▬▬▬▬▬▬▬▬▬'.split('')
-            bar.splice(index, 0, '🔘')
+            const bar = '━━━━━━━━━━━'.split('')
+            bar.splice(index, 0, '●')
             if (timecodes) {
                 const currentTimecode = Util.buildTimecode(ms(currentStreamTime))
                 const endTimecode = Util.buildTimecode(ms(totalTime))
-                return `${currentTimecode} ┃ ${bar.join('')} ┃ ${endTimecode}`
+                return `${currentTimecode} ${bar.join('')} ${endTimecode}`
             } else {
                 return `${bar.join('')}`
             }
@@ -1064,9 +1065,9 @@ class Player extends EventEmitter {
             if (timecodes) {
                 const currentTimecode = Util.buildTimecode(ms(currentStreamTime))
                 const endTimecode = Util.buildTimecode(ms(totalTime))
-                return `${currentTimecode} ┃ 🔘▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ┃ ${endTimecode}`
+                return `${currentTimecode} ●━━━━━━━━━━ ${endTimecode}`
             } else {
-                return '🔘▬▬▬▬▬▬▬▬▬▬▬▬▬▬'
+                return '●━━━━━━━━━━'
             }
         }
     }
